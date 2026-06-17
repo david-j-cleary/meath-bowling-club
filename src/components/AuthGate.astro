@@ -1,4 +1,10 @@
 ---
+const { requiredRole = 'member' } = Astro.props;
+const requiredLevel = {
+  member: 1,
+  committee: 2,
+  admin: 3
+}[requiredRole] ?? 1;
 ---
 <div class="relative rounded-3xl bg-white p-8 shadow-sm" id="auth-gate-root" data-required-level={requiredLevel}>
   <div id="auth-gate-loading" class="space-y-4">
