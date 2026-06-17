@@ -8,15 +8,15 @@ const requiredLevel = {
 ---
 <div class="relative rounded-3xl bg-white p-8 shadow-sm" id="auth-gate-root" data-required-level={requiredLevel}>
   <div id="auth-gate-loading" class="space-y-4">
-    <p class="text-xl font-semibold text-slate-900">Checking access...</p>
-    <p class="text-slate-600">Please wait while we verify your club membership status.</p>
+    <p class="text-xl font-semibold text-club-900">Checking access...</p>
+    <p class="text-club-500">Please wait while we verify your club membership status.</p>
   </div>
   <div id="auth-gate-content" hidden>
     <slot />
   </div>
   <div id="auth-gate-unauthorized" hidden class="space-y-4">
-    <p class="text-xl font-semibold text-slate-900">Access restricted</p>
-    <p class="text-slate-600">This content is for authorized members only.</p>
+    <p class="text-xl font-semibold text-club-900">Access restricted</p>
+    <p class="text-club-500">This content is for authorized members only.</p>
     <a href="/login" class="inline-flex items-center rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Sign in</a>
   </div>
 </div>

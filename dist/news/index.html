@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>News | Meath Bowling Club</title><meta name="description" content="Latest news and announcements from Meath Bowling Club."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="/_astro/about.B7FsG_WM.css"></head> <body class="bg-slate-50 text-slate-900 antialiased"> <div class="min-h-screen flex flex-col"> <header class="bg-white border-b border-slate-200"> <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"> <a href="/" class="flex items-center gap-3 text-club-700"> <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-club-100 text-lg font-bold">M</span> <div> <p class="text-sm font-semibold uppercase tracking-[0.3em]">Meath Bowling Club</p> <p class="text-xs text-slate-600">Lawn bowls for the local community</p> </div> </a> <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700"> <a href="/about">About</a> <a href="/membership">Membership</a> <a href="/news">News</a> <a href="/events">Events</a> <a href="/gallery">Gallery</a> <a href="/contact">Contact</a> </nav> <div class="hidden md:block"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> <div class="md:hidden"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> </div> </header> <main class="flex-1">  <section class="bg-white"> <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"> <div class="space-y-6"> <div class="space-y-3"> <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Club news</p> <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Latest announcements</h1> <p class="max-w-3xl text-lg leading-8 text-slate-600">Stay informed about club events, results, and member notices.</p> </div> <div class="grid gap-6 md:grid-cols-2"> <article class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm"> <img src="/images/gallery-1.svg" alt="Article image" class="mb-4 h-44 w-full rounded-2xl object-cover"> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">May 12, 2026</p> <h2 class="mt-4 text-2xl font-semibold text-slate-900">New coaching sessions start this month</h2> <p class="mt-3 text-slate-600">Weekly bowls coaching for all abilities begins soon. Join us to learn new skills and meet club members.</p> <a href="/news/new-coaching-sessions" class="mt-6 inline-flex items-center text-club-700 hover:underline">Read more</a> </article><article class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm"> <img src="/images/gallery-1.svg" alt="Article image" class="mb-4 h-44 w-full rounded-2xl object-cover"> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">April 28, 2026</p> <h2 class="mt-4 text-2xl font-semibold text-slate-900">Club open day highlights</h2> <p class="mt-3 text-slate-600">Our recent open day brought new visitors and friendly matches. See the community moments from the green.</p> <a href="/news/open-day-highlights" class="mt-6 inline-flex items-center text-club-700 hover:underline">Read more</a> </article> </div> </div> </div> </section>  </main> <footer class="bg-slate-950 text-slate-200"> <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"> <div class="grid gap-8 md:grid-cols-3"> <div> <p class="text-lg font-semibold text-white">Meath Bowling Club</p> <p class="mt-3 text-sm leading-6 text-slate-300">Friendly, community-first lawn bowls in Meath. Everyone is welcome, whether you're new or returning.</p> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Quick links</p> <ul class="mt-4 space-y-3 text-sm text-slate-300"> <li><a href="/about" class="hover:text-white">About</a></li> <li><a href="/membership" class="hover:text-white">Membership</a></li> <li><a href="/news" class="hover:text-white">News</a></li> <li><a href="/events" class="hover:text-white">Gallery</a></li> </ul> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Contact</p> <p class="mt-4 text-sm text-slate-300">Meath, Ireland</p> <p class="mt-2 text-sm text-slate-300">Email: <a href="mailto:info@meathbowlingclub.ie" class="text-white">info@meathbowlingclub.ie</a></p> </div> </div> <div class="mt-10 border-t border-slate-800 pt-6 text-sm text-slate-500">© 2026 Meath Bowling Club. Built for community.</div> </div> </footer> </div> </body></html>
