@@ -6,14 +6,14 @@ import AuthGate from '../components/AuthGate.astro';
 ---
 <BaseLayout title="Admin Dashboard" description="Admin dashboard for club content and member management.">
   <SiteHeader currentUser={null} slot="header" />
-  <section class="bg-slate-50">
+  <section class="bg-club-50">
     <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <AuthGate requiredRole="committee">
         <div class="space-y-10">
           <div class="space-y-3">
             <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Admin dashboard</p>
-            <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Simple club management</h1>
-            <p class="max-w-3xl text-lg leading-8 text-slate-600">Manage news, events, media, documents, and members with clear controls built for volunteers.</p>
+            <h1 class="text-4xl font-semibold text-club-900 sm:text-5xl">Simple club management</h1>
+            <p class="max-w-3xl text-lg leading-8 text-club-500">Manage news, events, media, documents, and members with clear controls built for volunteers.</p>
           </div>
 
             <div class="rounded-3xl overflow-hidden bg-white shadow-sm">
@@ -22,49 +22,49 @@ import AuthGate from '../components/AuthGate.astro';
 
           <div class="grid gap-4 md:grid-cols-4">
             <div class="rounded-3xl bg-white p-6 shadow-sm">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">News posts</p>
-              <p class="mt-4 text-3xl font-semibold text-slate-900" id="news-count">0</p>
+              <p class="text-sm uppercase tracking-[0.24em] text-club-300">News posts</p>
+              <p class="mt-4 text-3xl font-semibold text-club-900" id="news-count">0</p>
             </div>
             <div class="rounded-3xl bg-white p-6 shadow-sm">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Events</p>
-              <p class="mt-4 text-3xl font-semibold text-slate-900" id="events-count">0</p>
+              <p class="text-sm uppercase tracking-[0.24em] text-club-300">Events</p>
+              <p class="mt-4 text-3xl font-semibold text-club-900" id="events-count">0</p>
             </div>
             <div class="rounded-3xl bg-white p-6 shadow-sm">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Gallery items</p>
-              <p class="mt-4 text-3xl font-semibold text-slate-900" id="gallery-count">0</p>
+              <p class="text-sm uppercase tracking-[0.24em] text-club-300">Gallery items</p>
+              <p class="mt-4 text-3xl font-semibold text-club-900" id="gallery-count">0</p>
             </div>
             <div class="rounded-3xl bg-white p-6 shadow-sm">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Members</p>
-              <p class="mt-4 text-3xl font-semibold text-slate-900" id="members-count">0</p>
+              <p class="text-sm uppercase tracking-[0.24em] text-club-300">Members</p>
+              <p class="mt-4 text-3xl font-semibold text-club-900" id="members-count">0</p>
             </div>
           </div>
 
           <nav class="rounded-3xl bg-white p-4 shadow-sm">
-            <div class="flex flex-wrap gap-2 text-sm font-medium text-slate-700">
+            <div class="flex flex-wrap gap-2 text-sm font-medium text-club-700">
               <button class="admin-tab active rounded-full px-4 py-2 bg-club-700 text-white" data-tab="news">News</button>
-              <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="events">Events</button>
-              <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="gallery">Gallery</button>
-              <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="documents">Documents</button>
-              <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="members">Members</button>
+              <button class="admin-tab rounded-full px-4 py-2 bg-club-100 text-club-700" data-tab="events">Events</button>
+              <button class="admin-tab rounded-full px-4 py-2 bg-club-100 text-club-700" data-tab="gallery">Gallery</button>
+              <button class="admin-tab rounded-full px-4 py-2 bg-club-100 text-club-700" data-tab="documents">Documents</button>
+              <button class="admin-tab rounded-full px-4 py-2 bg-club-100 text-club-700" data-tab="members">Members</button>
             </div>
           </nav>
 
           <div class="rounded-3xl bg-white p-6 shadow-sm">
-            <div id="admin-feedback" class="mb-6 rounded-2xl bg-green-50 p-4 text-sm text-slate-700 hidden"></div>
+            <div id="admin-feedback" class="mb-6 rounded-2xl bg-green-50 p-4 text-sm text-club-700 hidden"></div>
             <div class="admin-section" id="section-news">
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 class="text-2xl font-semibold text-slate-900">News posts</h2>
-                  <p class="mt-2 text-slate-600">Create and publish club announcements with ease.</p>
+                  <h2 class="text-2xl font-semibold text-club-900">News posts</h2>
+                  <p class="mt-2 text-club-500">Create and publish club announcements with ease.</p>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row">
                   <button id="news-create" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Create news</button>
-                  <input id="news-search" type="search" placeholder="Search posts" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900" />
+                  <input id="news-search" type="search" placeholder="Search posts" class="rounded-full border border-club-200 bg-club-50 px-4 py-3 text-sm text-club-900" />
                 </div>
               </div>
-              <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200">
-                <table class="min-w-full text-left text-sm text-slate-700">
-                  <thead class="bg-slate-100">
+              <div class="mt-6 overflow-hidden rounded-3xl border border-club-200">
+                <table class="min-w-full text-left text-sm text-club-700">
+                  <thead class="bg-club-100">
                     <tr>
                       <th class="px-4 py-3">Title</th>
                       <th class="px-4 py-3">Status</th>
@@ -72,24 +72,24 @@ import AuthGate from '../components/AuthGate.astro';
                       <th class="px-4 py-3">Actions</th>
                     </tr>
                   </thead>
-                  <tbody id="news-table" class="divide-y divide-slate-200 bg-white"></tbody>
+                  <tbody id="news-table" class="divide-y divide-club-200 bg-white"></tbody>
                 </table>
               </div>
             </div>
             <div class="admin-section hidden" id="section-events">
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 class="text-2xl font-semibold text-slate-900">Events</h2>
-                  <p class="mt-2 text-slate-600">Manage event listings and visibility for members and guests.</p>
+                  <h2 class="text-2xl font-semibold text-club-900">Events</h2>
+                  <p class="mt-2 text-club-500">Manage event listings and visibility for members and guests.</p>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row">
                   <button id="event-create" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Create event</button>
-                  <input id="events-search" type="search" placeholder="Search events" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900" />
+                  <input id="events-search" type="search" placeholder="Search events" class="rounded-full border border-club-200 bg-club-50 px-4 py-3 text-sm text-club-900" />
                 </div>
               </div>
-              <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200">
-                <table class="min-w-full text-left text-sm text-slate-700">
-                  <thead class="bg-slate-100">
+              <div class="mt-6 overflow-hidden rounded-3xl border border-club-200">
+                <table class="min-w-full text-left text-sm text-club-700">
+                  <thead class="bg-club-100">
                     <tr>
                       <th class="px-4 py-3">Title</th>
                       <th class="px-4 py-3">Date</th>
@@ -97,15 +97,15 @@ import AuthGate from '../components/AuthGate.astro';
                       <th class="px-4 py-3">Actions</th>
                     </tr>
                   </thead>
-                  <tbody id="events-table" class="divide-y divide-slate-200 bg-white"></tbody>
+                  <tbody id="events-table" class="divide-y divide-club-200 bg-white"></tbody>
                 </table>
               </div>
             </div>
             <div class="admin-section hidden" id="section-gallery">
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 class="text-2xl font-semibold text-slate-900">Gallery</h2>
-                  <p class="mt-2 text-slate-600">Upload photos and manage gallery items for the public site.</p>
+                  <h2 class="text-2xl font-semibold text-club-900">Gallery</h2>
+                  <p class="mt-2 text-club-500">Upload photos and manage gallery items for the public site.</p>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row">
                   <button id="photo-upload" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Upload photo</button>
@@ -116,16 +116,16 @@ import AuthGate from '../components/AuthGate.astro';
             <div class="admin-section hidden" id="section-documents">
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 class="text-2xl font-semibold text-slate-900">Documents</h2>
-                  <p class="mt-2 text-slate-600">Add membership documents and resources with visibility controls.</p>
+                  <h2 class="text-2xl font-semibold text-club-900">Documents</h2>
+                  <p class="mt-2 text-club-500">Add membership documents and resources with visibility controls.</p>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row">
                   <button id="document-upload" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Add document</button>
                 </div>
               </div>
-              <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200">
-                <table class="min-w-full text-left text-sm text-slate-700">
-                  <thead class="bg-slate-100">
+              <div class="mt-6 overflow-hidden rounded-3xl border border-club-200">
+                <table class="min-w-full text-left text-sm text-club-700">
+                  <thead class="bg-club-100">
                     <tr>
                       <th class="px-4 py-3">Title</th>
                       <th class="px-4 py-3">Visibility</th>
@@ -133,23 +133,23 @@ import AuthGate from '../components/AuthGate.astro';
                       <th class="px-4 py-3">Actions</th>
                     </tr>
                   </thead>
-                  <tbody id="documents-table" class="divide-y divide-slate-200 bg-white"></tbody>
+                  <tbody id="documents-table" class="divide-y divide-club-200 bg-white"></tbody>
                 </table>
               </div>
             </div>
             <div class="admin-section hidden" id="section-members">
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 class="text-2xl font-semibold text-slate-900">Members</h2>
-                  <p class="mt-2 text-slate-600">Update member roles, approve accounts, and manage active status.</p>
+                  <h2 class="text-2xl font-semibold text-club-900">Members</h2>
+                  <p class="mt-2 text-club-500">Update member roles, approve accounts, and manage active status.</p>
                 </div>
                 <div>
-                  <input id="members-search" type="search" placeholder="Search members" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900" />
+                  <input id="members-search" type="search" placeholder="Search members" class="rounded-full border border-club-200 bg-club-50 px-4 py-3 text-sm text-club-900" />
                 </div>
               </div>
-              <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200">
-                <table class="min-w-full text-left text-sm text-slate-700">
-                  <thead class="bg-slate-100">
+              <div class="mt-6 overflow-hidden rounded-3xl border border-club-200">
+                <table class="min-w-full text-left text-sm text-club-700">
+                  <thead class="bg-club-100">
                     <tr>
                       <th class="px-4 py-3">Name</th>
                       <th class="px-4 py-3">Role</th>
@@ -157,7 +157,7 @@ import AuthGate from '../components/AuthGate.astro';
                       <th class="px-4 py-3">Actions</th>
                     </tr>
                   </thead>
-                  <tbody id="members-table" class="divide-y divide-slate-200 bg-white"></tbody>
+                  <tbody id="members-table" class="divide-y divide-club-200 bg-white"></tbody>
                 </table>
               </div>
             </div>
@@ -213,8 +213,8 @@ import AuthGate from '../components/AuthGate.astro';
       const active = button.dataset.tab === tabName;
       button.classList.toggle('bg-club-700', active);
       button.classList.toggle('text-white', active);
-      button.classList.toggle('bg-slate-100', !active);
-      button.classList.toggle('text-slate-700', !active);
+      button.classList.toggle('bg-club-100', !active);
+      button.classList.toggle('text-club-700', !active);
     });
     sections.forEach((section) => {
       section.classList.toggle('hidden', section.id !== `section-${tabName}`);
@@ -237,11 +237,11 @@ import AuthGate from '../components/AuthGate.astro';
     newsItems.forEach((item) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td class="px-4 py-4 font-semibold text-slate-900">${item.title}</td>
-        <td class="px-4 py-4 uppercase text-sm text-slate-600">${item.status}</td>
-        <td class="px-4 py-4 text-slate-600">${item.published_at ? new Date(item.published_at).toLocaleDateString() : '—'}</td>
+        <td class="px-4 py-4 font-semibold text-club-900">${item.title}</td>
+        <td class="px-4 py-4 uppercase text-sm text-club-500">${item.status}</td>
+        <td class="px-4 py-4 text-club-500">${item.published_at ? new Date(item.published_at).toLocaleDateString() : '—'}</td>
         <td class="px-4 py-4 space-x-2">
-          <button data-id="${item.id}" data-action="edit-news" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">Edit</button>
+          <button data-id="${item.id}" data-action="edit-news" class="rounded-full bg-club-100 px-3 py-2 text-sm text-club-700 hover:bg-club-200">Edit</button>
           <button data-id="${item.id}" data-action="delete-news" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
           <button data-id="${item.id}" data-action="toggle-news" class="rounded-full bg-club-100 px-3 py-2 text-sm text-club-700 hover:bg-club-200">${item.status === 'published' ? 'Unpublish' : 'Publish'}</button>
         </td>
@@ -256,11 +256,11 @@ import AuthGate from '../components/AuthGate.astro';
     eventItems.forEach((event) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td class="px-4 py-4 font-semibold text-slate-900">${event.title}</td>
-        <td class="px-4 py-4 text-slate-600">${new Date(event.start_time).toLocaleDateString()}</td>
-        <td class="px-4 py-4 uppercase text-sm text-slate-600">${event.status}</td>
+        <td class="px-4 py-4 font-semibold text-club-900">${event.title}</td>
+        <td class="px-4 py-4 text-club-500">${new Date(event.start_time).toLocaleDateString()}</td>
+        <td class="px-4 py-4 uppercase text-sm text-club-500">${event.status}</td>
         <td class="px-4 py-4 space-x-2">
-          <button data-id="${event.id}" data-action="edit-event" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">Edit</button>
+          <button data-id="${event.id}" data-action="edit-event" class="rounded-full bg-club-100 px-3 py-2 text-sm text-club-700 hover:bg-club-200">Edit</button>
           <button data-id="${event.id}" data-action="delete-event" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
         </td>
       `;
@@ -273,11 +273,11 @@ import AuthGate from '../components/AuthGate.astro';
     galleryList.innerHTML = '';
     galleryItems.forEach((item) => {
       const card = document.createElement('div');
-      card.className = 'flex flex-col gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between';
+      card.className = 'flex flex-col gap-3 rounded-3xl border border-club-200 bg-club-50 p-4 sm:flex-row sm:items-center sm:justify-between';
       card.innerHTML = `
         <div>
-          <p class="font-semibold text-slate-900">${item.title || 'Untitled photo'}</p>
-          <p class="text-slate-600">Album ${item.album_id} · ${new Date(item.uploaded_at).toLocaleDateString()}</p>
+          <p class="font-semibold text-club-900">${item.title || 'Untitled photo'}</p>
+          <p class="text-club-500">Album ${item.album_id} · ${new Date(item.uploaded_at).toLocaleDateString()}</p>
         </div>
         <button data-id="${item.id}" data-action="delete-photo" class="rounded-full bg-red-100 px-4 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
       `;
@@ -291,11 +291,11 @@ import AuthGate from '../components/AuthGate.astro';
     documentItems.forEach((doc) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td class="px-4 py-4 font-semibold text-slate-900">${doc.title}</td>
-        <td class="px-4 py-4 uppercase text-sm text-slate-600">${doc.visibility}</td>
-        <td class="px-4 py-4 text-slate-600">${new Date(doc.uploaded_at).toLocaleDateString()}</td>
+        <td class="px-4 py-4 font-semibold text-club-900">${doc.title}</td>
+        <td class="px-4 py-4 uppercase text-sm text-club-500">${doc.visibility}</td>
+        <td class="px-4 py-4 text-club-500">${new Date(doc.uploaded_at).toLocaleDateString()}</td>
         <td class="px-4 py-4 space-x-2">
-          <a href="/" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">View</a>
+          <a href="/" class="rounded-full bg-club-100 px-3 py-2 text-sm text-club-700 hover:bg-club-200">View</a>
           <button data-id="${doc.id}" data-action="delete-document" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
         </td>
       `;
@@ -308,11 +308,11 @@ import AuthGate from '../components/AuthGate.astro';
     memberItems.forEach((member) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td class="px-4 py-4 font-semibold text-slate-900">${member.full_name}</td>
-        <td class="px-4 py-4 text-slate-600">${member.role}</td>
-        <td class="px-4 py-4 uppercase text-sm text-slate-600">${member.is_active ? 'Active' : 'Inactive'}</td>
+        <td class="px-4 py-4 font-semibold text-club-900">${member.full_name}</td>
+        <td class="px-4 py-4 text-club-500">${member.role}</td>
+        <td class="px-4 py-4 uppercase text-sm text-club-500">${member.is_active ? 'Active' : 'Inactive'}</td>
         <td class="px-4 py-4 space-x-2">
-          <button data-id="${member.id}" data-action="toggle-member" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">${member.is_active ? 'Deactivate' : 'Activate'}</button>
+          <button data-id="${member.id}" data-action="toggle-member" class="rounded-full bg-club-100 px-3 py-2 text-sm text-club-700 hover:bg-club-200">${member.is_active ? 'Deactivate' : 'Activate'}</button>
           <button data-id="${member.id}" data-action="delete-member" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Remove</button>
         </td>
       `;

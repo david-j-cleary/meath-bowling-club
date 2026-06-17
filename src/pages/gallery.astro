@@ -15,16 +15,16 @@ const albums = [
       <div class="space-y-6">
         <div class="space-y-3">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Gallery</p>
-          <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Club photographs</h1>
-          <p class="max-w-3xl text-lg leading-8 text-slate-600">Browse moments from our events, social gatherings, and club life.</p>
+          <h1 class="text-4xl font-semibold text-club-900 sm:text-5xl">Club photographs</h1>
+          <p class="max-w-3xl text-lg leading-8 text-club-500">Browse moments from our events, social gatherings, and club life.</p>
         </div>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {albums.map((album) => (
-            <article class="group overflow-hidden rounded-3xl bg-slate-50 shadow-sm">
+            <article class="group overflow-hidden rounded-3xl bg-club-50 shadow-sm">
               <img src={album.image} alt={album.title} class="h-72 w-full object-cover transition duration-300 group-hover:scale-105" />
               <div class="p-6">
-                <h2 class="text-xl font-semibold text-slate-900">{album.title}</h2>
-                <p class="mt-3 text-slate-600">{album.description}</p>
+                <h2 class="text-xl font-semibold text-club-900">{album.title}</h2>
+                <p class="mt-3 text-club-500">{album.description}</p>
               </div>
             </article>
           ))}

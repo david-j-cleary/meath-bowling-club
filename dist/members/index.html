@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Members | Meath Bowling Club</title><meta name="description" content="Members-only area for Meath Bowling Club."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="/_astro/about.B7FsG_WM.css"></head> <body class="bg-slate-50 text-slate-900 antialiased"> <div class="min-h-screen flex flex-col"> <header class="bg-white border-b border-slate-200"> <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"> <a href="/" class="flex items-center gap-3 text-club-700"> <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-club-100 text-lg font-bold">M</span> <div> <p class="text-sm font-semibold uppercase tracking-[0.3em]">Meath Bowling Club</p> <p class="text-xs text-slate-600">Lawn bowls for the local community</p> </div> </a> <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700"> <a href="/about">About</a> <a href="/membership">Membership</a> <a href="/news">News</a> <a href="/events">Events</a> <a href="/gallery">Gallery</a> <a href="/contact">Contact</a> </nav> <div class="hidden md:block"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> <div class="md:hidden"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> </div> </header> <main class="flex-1">  <section class="bg-white"> <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8"> <div class="relative rounded-3xl bg-white p-8 shadow-sm" id="auth-gate-root" data-required-level="1"> <div id="auth-gate-loading" class="space-y-4"> <p class="text-xl font-semibold text-slate-900">Checking access...</p> <p class="text-slate-600">Please wait while we verify your club membership status.</p> </div> <div id="auth-gate-content" hidden>  <div class="space-y-8"> <div class="space-y-3"> <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Members area</p> <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Member resources and updates</h1> <p class="max-w-3xl text-lg leading-8 text-slate-600">Welcome back. Here’s your quick access to member-only notices, events, and documents.</p> </div> <div class="rounded-3xl overflow-hidden bg-club-50 p-0 shadow-sm"> <img src="/images/club-green.svg" alt="Members area" class="w-full object-cover"> </div> <div class="grid gap-6 md:grid-cols-3"> <article class="rounded-3xl bg-club-50 p-6 shadow-sm"> <h2 class="text-xl font-semibold text-slate-900">Member notices</h2> <p class="mt-3 text-slate-600">Access member-only announcements and club updates.</p> <a href="/news" class="mt-6 inline-flex items-center text-club-700 hover:underline">Open</a> </article><article class="rounded-3xl bg-club-50 p-6 shadow-sm"> <h2 class="text-xl font-semibold text-slate-900">Event details</h2> <p class="mt-3 text-slate-600">View upcoming members-only events and match information.</p> <a href="/events" class="mt-6 inline-flex items-center text-club-700 hover:underline">Open</a> </article><article class="rounded-3xl bg-club-50 p-6 shadow-sm"> <h2 class="text-xl font-semibold text-slate-900">Documents</h2> <p class="mt-3 text-slate-600">Download member resources and club paperwork.</p> <a href="/contact" class="mt-6 inline-flex items-center text-club-700 hover:underline">Open</a> </article> </div> </div>  </div> <div id="auth-gate-unauthorized" hidden class="space-y-4"> <p class="text-xl font-semibold text-slate-900">Access restricted</p> <p class="text-slate-600">This content is for authorized members only.</p> <a href="/login" class="inline-flex items-center rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Sign in</a> </div> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+
+  const root = document.getElementById('auth-gate-root');
+  const loading = document.getElementById('auth-gate-loading');
+  const content = document.getElementById('auth-gate-content');
+  const unauthorized = document.getElementById('auth-gate-unauthorized');
+  const requiredLevel = Number(root?.dataset.requiredLevel ?? '1');
+
+  async function verifyRole() {
+    const { data } = await supabase.auth.getSession();
+    const user = data.session?.user;
+
+    if (!user) {
+      return false;
+    }
+
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('role, is_active')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !profile || !profile.is_active) {
+      return false;
+    }
+
+    const levelMap = {
+      member: 1,
+      committee: 2,
+      admin: 3
+    };
+
+    return levelMap[profile.role] >= requiredLevel;
+  }
+
+  const isAuthorized = await verifyRole();
+  loading.hidden = true;
+  if (isAuthorized) {
+    content.hidden = false;
+  } else {
+    unauthorized.hidden = false;
+  }
+</script> </div> </section>  </main> <footer class="bg-slate-950 text-slate-200"> <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"> <div class="grid gap-8 md:grid-cols-3"> <div> <p class="text-lg font-semibold text-white">Meath Bowling Club</p> <p class="mt-3 text-sm leading-6 text-slate-300">Friendly, community-first lawn bowls in Meath. Everyone is welcome, whether you're new or returning.</p> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Quick links</p> <ul class="mt-4 space-y-3 text-sm text-slate-300"> <li><a href="/about" class="hover:text-white">About</a></li> <li><a href="/membership" class="hover:text-white">Membership</a></li> <li><a href="/news" class="hover:text-white">News</a></li> <li><a href="/events" class="hover:text-white">Gallery</a></li> </ul> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Contact</p> <p class="mt-4 text-sm text-slate-300">Meath, Ireland</p> <p class="mt-2 text-sm text-slate-300">Email: <a href="mailto:info@meathbowlingclub.ie" class="text-white">info@meathbowlingclub.ie</a></p> </div> </div> <div class="mt-10 border-t border-slate-800 pt-6 text-sm text-slate-500">© 2026 Meath Bowling Club. Built for community.</div> </div> </footer> </div> </body></html>

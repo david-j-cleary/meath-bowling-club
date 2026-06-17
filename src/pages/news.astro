@@ -25,16 +25,16 @@ const articles = [
       <div class="space-y-6">
         <div class="space-y-3">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Club news</p>
-          <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Latest announcements</h1>
-          <p class="max-w-3xl text-lg leading-8 text-slate-600">Stay informed about club events, results, and member notices.</p>
+          <h1 class="text-4xl font-semibold text-club-900 sm:text-5xl">Latest announcements</h1>
+          <p class="max-w-3xl text-lg leading-8 text-club-500">Stay informed about club events, results, and member notices.</p>
         </div>
         <div class="grid gap-6 md:grid-cols-2">
           {articles.map((article) => (
-            <article class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+            <article class="rounded-3xl border border-club-200 bg-club-50 p-6 shadow-sm">
               <img src="/images/gallery-1.svg" alt="Article image" class="mb-4 h-44 w-full rounded-2xl object-cover" />
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">{article.date}</p>
-              <h2 class="mt-4 text-2xl font-semibold text-slate-900">{article.title}</h2>
-              <p class="mt-3 text-slate-600">{article.excerpt}</p>
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-club-300">{article.date}</p>
+              <h2 class="mt-4 text-2xl font-semibold text-club-900">{article.title}</h2>
+              <p class="mt-3 text-club-500">{article.excerpt}</p>
               <a href={article.href} class="mt-6 inline-flex items-center text-club-700 hover:underline">Read more</a>
             </article>
           ))}

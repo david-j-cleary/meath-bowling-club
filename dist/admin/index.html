@@ -1,0 +1,436 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Dashboard | Meath Bowling Club</title><meta name="description" content="Admin dashboard for club content and member management."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="/_astro/about.B7FsG_WM.css"></head> <body class="bg-slate-50 text-slate-900 antialiased"> <div class="min-h-screen flex flex-col"> <header class="bg-white border-b border-slate-200"> <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"> <a href="/" class="flex items-center gap-3 text-club-700"> <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-club-100 text-lg font-bold">M</span> <div> <p class="text-sm font-semibold uppercase tracking-[0.3em]">Meath Bowling Club</p> <p class="text-xs text-slate-600">Lawn bowls for the local community</p> </div> </a> <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700"> <a href="/about">About</a> <a href="/membership">Membership</a> <a href="/news">News</a> <a href="/events">Events</a> <a href="/gallery">Gallery</a> <a href="/contact">Contact</a> </nav> <div class="hidden md:block"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> <div class="md:hidden"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> </div> </header> <main class="flex-1">  <section class="bg-slate-50"> <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"> <div class="relative rounded-3xl bg-white p-8 shadow-sm" id="auth-gate-root" data-required-level="2"> <div id="auth-gate-loading" class="space-y-4"> <p class="text-xl font-semibold text-slate-900">Checking access...</p> <p class="text-slate-600">Please wait while we verify your club membership status.</p> </div> <div id="auth-gate-content" hidden>  <div class="space-y-10"> <div class="space-y-3"> <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Admin dashboard</p> <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Simple club management</h1> <p class="max-w-3xl text-lg leading-8 text-slate-600">Manage news, events, media, documents, and members with clear controls built for volunteers.</p> </div> <div class="rounded-3xl overflow-hidden bg-white shadow-sm"> <img src="/images/gallery-1.svg" alt="Admin placeholder" class="w-full object-cover"> </div> <div class="grid gap-4 md:grid-cols-4"> <div class="rounded-3xl bg-white p-6 shadow-sm"> <p class="text-sm uppercase tracking-[0.24em] text-slate-500">News posts</p> <p class="mt-4 text-3xl font-semibold text-slate-900" id="news-count">0</p> </div> <div class="rounded-3xl bg-white p-6 shadow-sm"> <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Events</p> <p class="mt-4 text-3xl font-semibold text-slate-900" id="events-count">0</p> </div> <div class="rounded-3xl bg-white p-6 shadow-sm"> <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Gallery items</p> <p class="mt-4 text-3xl font-semibold text-slate-900" id="gallery-count">0</p> </div> <div class="rounded-3xl bg-white p-6 shadow-sm"> <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Members</p> <p class="mt-4 text-3xl font-semibold text-slate-900" id="members-count">0</p> </div> </div> <nav class="rounded-3xl bg-white p-4 shadow-sm"> <div class="flex flex-wrap gap-2 text-sm font-medium text-slate-700"> <button class="admin-tab active rounded-full px-4 py-2 bg-club-700 text-white" data-tab="news">News</button> <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="events">Events</button> <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="gallery">Gallery</button> <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="documents">Documents</button> <button class="admin-tab rounded-full px-4 py-2 bg-slate-100 text-slate-700" data-tab="members">Members</button> </div> </nav> <div class="rounded-3xl bg-white p-6 shadow-sm"> <div id="admin-feedback" class="mb-6 rounded-2xl bg-green-50 p-4 text-sm text-slate-700 hidden"></div> <div class="admin-section" id="section-news"> <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"> <div> <h2 class="text-2xl font-semibold text-slate-900">News posts</h2> <p class="mt-2 text-slate-600">Create and publish club announcements with ease.</p> </div> <div class="flex flex-col gap-3 sm:flex-row"> <button id="news-create" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Create news</button> <input id="news-search" type="search" placeholder="Search posts" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900"> </div> </div> <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200"> <table class="min-w-full text-left text-sm text-slate-700"> <thead class="bg-slate-100"> <tr> <th class="px-4 py-3">Title</th> <th class="px-4 py-3">Status</th> <th class="px-4 py-3">Published</th> <th class="px-4 py-3">Actions</th> </tr> </thead> <tbody id="news-table" class="divide-y divide-slate-200 bg-white"></tbody> </table> </div> </div> <div class="admin-section hidden" id="section-events"> <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"> <div> <h2 class="text-2xl font-semibold text-slate-900">Events</h2> <p class="mt-2 text-slate-600">Manage event listings and visibility for members and guests.</p> </div> <div class="flex flex-col gap-3 sm:flex-row"> <button id="event-create" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Create event</button> <input id="events-search" type="search" placeholder="Search events" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900"> </div> </div> <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200"> <table class="min-w-full text-left text-sm text-slate-700"> <thead class="bg-slate-100"> <tr> <th class="px-4 py-3">Title</th> <th class="px-4 py-3">Date</th> <th class="px-4 py-3">Status</th> <th class="px-4 py-3">Actions</th> </tr> </thead> <tbody id="events-table" class="divide-y divide-slate-200 bg-white"></tbody> </table> </div> </div> <div class="admin-section hidden" id="section-gallery"> <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"> <div> <h2 class="text-2xl font-semibold text-slate-900">Gallery</h2> <p class="mt-2 text-slate-600">Upload photos and manage gallery items for the public site.</p> </div> <div class="flex flex-col gap-3 sm:flex-row"> <button id="photo-upload" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Upload photo</button> </div> </div> <div class="mt-6 space-y-4" id="gallery-list"></div> </div> <div class="admin-section hidden" id="section-documents"> <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"> <div> <h2 class="text-2xl font-semibold text-slate-900">Documents</h2> <p class="mt-2 text-slate-600">Add membership documents and resources with visibility controls.</p> </div> <div class="flex flex-col gap-3 sm:flex-row"> <button id="document-upload" class="rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Add document</button> </div> </div> <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200"> <table class="min-w-full text-left text-sm text-slate-700"> <thead class="bg-slate-100"> <tr> <th class="px-4 py-3">Title</th> <th class="px-4 py-3">Visibility</th> <th class="px-4 py-3">Uploaded</th> <th class="px-4 py-3">Actions</th> </tr> </thead> <tbody id="documents-table" class="divide-y divide-slate-200 bg-white"></tbody> </table> </div> </div> <div class="admin-section hidden" id="section-members"> <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"> <div> <h2 class="text-2xl font-semibold text-slate-900">Members</h2> <p class="mt-2 text-slate-600">Update member roles, approve accounts, and manage active status.</p> </div> <div> <input id="members-search" type="search" placeholder="Search members" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900"> </div> </div> <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200"> <table class="min-w-full text-left text-sm text-slate-700"> <thead class="bg-slate-100"> <tr> <th class="px-4 py-3">Name</th> <th class="px-4 py-3">Role</th> <th class="px-4 py-3">Status</th> <th class="px-4 py-3">Actions</th> </tr> </thead> <tbody id="members-table" class="divide-y divide-slate-200 bg-white"></tbody> </table> </div> </div> </div> </div>  </div> <div id="auth-gate-unauthorized" hidden class="space-y-4"> <p class="text-xl font-semibold text-slate-900">Access restricted</p> <p class="text-slate-600">This content is for authorized members only.</p> <a href="/login" class="inline-flex items-center rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Sign in</a> </div> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+
+  const root = document.getElementById('auth-gate-root');
+  const loading = document.getElementById('auth-gate-loading');
+  const content = document.getElementById('auth-gate-content');
+  const unauthorized = document.getElementById('auth-gate-unauthorized');
+  const requiredLevel = Number(root?.dataset.requiredLevel ?? '1');
+
+  async function verifyRole() {
+    const { data } = await supabase.auth.getSession();
+    const user = data.session?.user;
+
+    if (!user) {
+      return false;
+    }
+
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('role, is_active')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !profile || !profile.is_active) {
+      return false;
+    }
+
+    const levelMap = {
+      member: 1,
+      committee: 2,
+      admin: 3
+    };
+
+    return levelMap[profile.role] >= requiredLevel;
+  }
+
+  const isAuthorized = await verifyRole();
+  loading.hidden = true;
+  if (isAuthorized) {
+    content.hidden = false;
+  } else {
+    unauthorized.hidden = false;
+  }
+</script> </div> </section>  </main> <footer class="bg-slate-950 text-slate-200"> <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"> <div class="grid gap-8 md:grid-cols-3"> <div> <p class="text-lg font-semibold text-white">Meath Bowling Club</p> <p class="mt-3 text-sm leading-6 text-slate-300">Friendly, community-first lawn bowls in Meath. Everyone is welcome, whether you're new or returning.</p> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Quick links</p> <ul class="mt-4 space-y-3 text-sm text-slate-300"> <li><a href="/about" class="hover:text-white">About</a></li> <li><a href="/membership" class="hover:text-white">Membership</a></li> <li><a href="/news" class="hover:text-white">News</a></li> <li><a href="/events" class="hover:text-white">Gallery</a></li> </ul> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Contact</p> <p class="mt-4 text-sm text-slate-300">Meath, Ireland</p> <p class="mt-2 text-sm text-slate-300">Email: <a href="mailto:info@meathbowlingclub.ie" class="text-white">info@meathbowlingclub.ie</a></p> </div> </div> <div class="mt-10 border-t border-slate-800 pt-6 text-sm text-slate-500">© 2026 Meath Bowling Club. Built for community.</div> </div> </footer> </div> </body></html> <script type="module" client:load>
+  import {
+    fetchNewsPosts,
+    upsertNewsPost,
+    deleteNewsPost,
+    toggleNewsStatus,
+    fetchEvents,
+    upsertEvent,
+    deleteEvent,
+    fetchGalleryPhotos,
+    uploadGalleryPhoto,
+    deleteGalleryPhoto,
+    fetchDocuments,
+    uploadDocument,
+    deleteDocument,
+    fetchMembers,
+    updateMember
+  } from '../lib/admin';
+
+  const tabs = document.querySelectorAll('.admin-tab');
+  const sections = document.querySelectorAll('.admin-section');
+  const feedback = document.getElementById('admin-feedback');
+  const newsCount = document.getElementById('news-count');
+  const eventsCount = document.getElementById('events-count');
+  const galleryCount = document.getElementById('gallery-count');
+  const membersCount = document.getElementById('members-count');
+
+  const newsTable = document.getElementById('news-table');
+  const eventsTable = document.getElementById('events-table');
+  const galleryList = document.getElementById('gallery-list');
+  const documentsTable = document.getElementById('documents-table');
+  const membersTable = document.getElementById('members-table');
+
+  let newsItems = [];
+  let eventItems = [];
+  let galleryItems = [];
+  let documentItems = [];
+  let memberItems = [];
+
+  function setActiveTab(tabName) {
+    tabs.forEach((button) => {
+      const active = button.dataset.tab === tabName;
+      button.classList.toggle('bg-club-700', active);
+      button.classList.toggle('text-white', active);
+      button.classList.toggle('bg-slate-100', !active);
+      button.classList.toggle('text-slate-700', !active);
+    });
+    sections.forEach((section) => {
+      section.classList.toggle('hidden', section.id !== `section-${tabName}`);
+    });
+  }
+
+  tabs.forEach((button) => {
+    button.addEventListener('click', () => setActiveTab(button.dataset.tab));
+  });
+
+  async function showMessage(message) {
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.classList.remove('hidden');
+    setTimeout(() => feedback.classList.add('hidden'), 4000);
+  }
+
+  function renderNews() {
+    newsTable.innerHTML = '';
+    newsItems.forEach((item) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-4 py-4 font-semibold text-slate-900">${item.title}</td>
+        <td class="px-4 py-4 uppercase text-sm text-slate-600">${item.status}</td>
+        <td class="px-4 py-4 text-slate-600">${item.published_at ? new Date(item.published_at).toLocaleDateString() : '—'}</td>
+        <td class="px-4 py-4 space-x-2">
+          <button data-id="${item.id}" data-action="edit-news" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">Edit</button>
+          <button data-id="${item.id}" data-action="delete-news" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
+          <button data-id="${item.id}" data-action="toggle-news" class="rounded-full bg-club-100 px-3 py-2 text-sm text-club-700 hover:bg-club-200">${item.status === 'published' ? 'Unpublish' : 'Publish'}</button>
+        </td>
+      `;
+      newsTable.appendChild(row);
+    });
+    newsCount.textContent = String(newsItems.length);
+  }
+
+  function renderEvents() {
+    eventsTable.innerHTML = '';
+    eventItems.forEach((event) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-4 py-4 font-semibold text-slate-900">${event.title}</td>
+        <td class="px-4 py-4 text-slate-600">${new Date(event.start_time).toLocaleDateString()}</td>
+        <td class="px-4 py-4 uppercase text-sm text-slate-600">${event.status}</td>
+        <td class="px-4 py-4 space-x-2">
+          <button data-id="${event.id}" data-action="edit-event" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">Edit</button>
+          <button data-id="${event.id}" data-action="delete-event" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
+        </td>
+      `;
+      eventsTable.appendChild(row);
+    });
+    eventsCount.textContent = String(eventItems.length);
+  }
+
+  function renderGallery() {
+    galleryList.innerHTML = '';
+    galleryItems.forEach((item) => {
+      const card = document.createElement('div');
+      card.className = 'flex flex-col gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between';
+      card.innerHTML = `
+        <div>
+          <p class="font-semibold text-slate-900">${item.title || 'Untitled photo'}</p>
+          <p class="text-slate-600">Album ${item.album_id} · ${new Date(item.uploaded_at).toLocaleDateString()}</p>
+        </div>
+        <button data-id="${item.id}" data-action="delete-photo" class="rounded-full bg-red-100 px-4 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
+      `;
+      galleryList.appendChild(card);
+    });
+    galleryCount.textContent = String(galleryItems.length);
+  }
+
+  function renderDocuments() {
+    documentsTable.innerHTML = '';
+    documentItems.forEach((doc) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-4 py-4 font-semibold text-slate-900">${doc.title}</td>
+        <td class="px-4 py-4 uppercase text-sm text-slate-600">${doc.visibility}</td>
+        <td class="px-4 py-4 text-slate-600">${new Date(doc.uploaded_at).toLocaleDateString()}</td>
+        <td class="px-4 py-4 space-x-2">
+          <a href="/" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">View</a>
+          <button data-id="${doc.id}" data-action="delete-document" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Delete</button>
+        </td>
+      `;
+      documentsTable.appendChild(row);
+    });
+  }
+
+  function renderMembers() {
+    membersTable.innerHTML = '';
+    memberItems.forEach((member) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-4 py-4 font-semibold text-slate-900">${member.full_name}</td>
+        <td class="px-4 py-4 text-slate-600">${member.role}</td>
+        <td class="px-4 py-4 uppercase text-sm text-slate-600">${member.is_active ? 'Active' : 'Inactive'}</td>
+        <td class="px-4 py-4 space-x-2">
+          <button data-id="${member.id}" data-action="toggle-member" class="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">${member.is_active ? 'Deactivate' : 'Activate'}</button>
+          <button data-id="${member.id}" data-action="delete-member" class="rounded-full bg-red-100 px-3 py-2 text-sm text-red-700 hover:bg-red-200">Remove</button>
+        </td>
+      `;
+      membersTable.appendChild(row);
+    });
+    membersCount.textContent = String(memberItems.length);
+  }
+
+  async function loadData() {
+    try {
+      newsItems = await fetchNewsPosts();
+      eventItems = await fetchEvents();
+      galleryItems = await fetchGalleryPhotos();
+      documentItems = await fetchDocuments();
+      memberItems = await fetchMembers();
+      renderNews();
+      renderEvents();
+      renderGallery();
+      renderDocuments();
+      renderMembers();
+    } catch (error) {
+      console.error(error);
+      showMessage('Unable to load admin data. Check your connection.');
+    }
+  }
+
+  async function handleNewsAction(event) {
+    const button = event.target.closest('button');
+    if (!button) return;
+    const action = button.dataset.action;
+    const id = Number(button.dataset.id);
+
+    if (action === 'delete-news' && confirm('Delete this news post?')) {
+      await deleteNewsPost(id);
+      await loadData();
+      showMessage('News post deleted.');
+    }
+    if (action === 'toggle-news') {
+      const post = newsItems.find((item) => item.id === id);
+      if (!post) return;
+      await toggleNewsStatus(id, post.status !== 'published');
+      await loadData();
+      showMessage(`News post ${post.status === 'published' ? 'unpublished' : 'published'}.`);
+    }
+    if (action === 'edit-news') {
+      const post = newsItems.find((item) => item.id === id);
+      if (!post) return;
+      const title = prompt('Title', post.title);
+      const summary = prompt('Summary', post.summary || '');
+      const body = prompt('Body', post.body);
+      if (title && body) {
+        await upsertNewsPost({ id, title, summary, body, status: post.status, slug: post.slug, published_at: post.published_at });
+        await loadData();
+        showMessage('News post updated.');
+      }
+    }
+  }
+
+  async function handleEventsAction(event) {
+    const button = event.target.closest('button');
+    if (!button) return;
+    const action = button.dataset.action;
+    const id = Number(button.dataset.id);
+
+    if (action === 'delete-event' && confirm('Delete this event?')) {
+      await deleteEvent(id);
+      await loadData();
+      showMessage('Event deleted.');
+    }
+    if (action === 'edit-event') {
+      const eventItem = eventItems.find((item) => item.id === id);
+      if (!eventItem) return;
+      const title = prompt('Title', eventItem.title);
+      const location = prompt('Location', eventItem.location);
+      const description = prompt('Description', eventItem.description);
+      if (title && location && description) {
+        await upsertEvent({ id, title, location, description, start_time: eventItem.start_time, end_time: eventItem.end_time, status: eventItem.status, visibility: eventItem.visibility });
+        await loadData();
+        showMessage('Event updated.');
+      }
+    }
+  }
+
+  async function handleGalleryDelete(event) {
+    const button = event.target.closest('button');
+    if (!button || button.dataset.action !== 'delete-photo') return;
+    const id = Number(button.dataset.id);
+    if (confirm('Delete this photo?')) {
+      await deleteGalleryPhoto(id);
+      await loadData();
+      showMessage('Photo deleted.');
+    }
+  }
+
+  async function handleDocumentsAction(event) {
+    const button = event.target.closest('button');
+    if (!button || button.dataset.action !== 'delete-document') return;
+    const id = Number(button.dataset.id);
+    if (confirm('Delete this document?')) {
+      await deleteDocument(id);
+      await loadData();
+      showMessage('Document deleted.');
+    }
+  }
+
+  async function handleMembersAction(event) {
+    const button = event.target.closest('button');
+    if (!button) return;
+    const action = button.dataset.action;
+    const id = button.dataset.id;
+    const member = memberItems.find((item) => item.id === id);
+    if (!member) return;
+
+    if (action === 'toggle-member') {
+      await updateMember(id, { is_active: !member.is_active });
+      await loadData();
+      showMessage(`${member.full_name} is now ${member.is_active ? 'inactive' : 'active'}.`);
+    }
+    if (action === 'delete-member' && confirm('Remove this member from profiles?')) {
+      await updateMember(id, { is_active: false });
+      await loadData();
+      showMessage(`${member.full_name} has been deactivated.`);
+    }
+  }
+
+  document.getElementById('news-table').addEventListener('click', handleNewsAction);
+  document.getElementById('events-table').addEventListener('click', handleEventsAction);
+  galleryList.addEventListener('click', handleGalleryDelete);
+  document.getElementById('documents-table').addEventListener('click', handleDocumentsAction);
+  document.getElementById('members-table').addEventListener('click', handleMembersAction);
+
+  document.getElementById('news-create').addEventListener('click', async () => {
+    const title = prompt('News title');
+    const summary = prompt('Summary');
+    const body = prompt('Body');
+    if (!title || !body) return;
+    await upsertNewsPost({ title, summary, body, status: 'draft', slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') });
+    await loadData();
+    showMessage('News post created.');
+  });
+
+  document.getElementById('event-create').addEventListener('click', async () => {
+    const title = prompt('Event title');
+    const location = prompt('Location');
+    const description = prompt('Description');
+    const startTime = prompt('Start time (ISO format)');
+    if (!title || !location || !description || !startTime) return;
+    await upsertEvent({ title, location, description, start_time: startTime, end_time: null, status: 'draft', visibility: 'public' });
+    await loadData();
+    showMessage('Event created.');
+  });
+
+  document.getElementById('photo-upload').addEventListener('click', async () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.onchange = async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      const albumId = Number(prompt('Album ID', '1'));
+      await uploadGalleryPhoto(file, albumId);
+      await loadData();
+      showMessage('Photo uploaded.');
+    };
+    fileInput.click();
+  });
+
+  document.getElementById('document-upload').addEventListener('click', async () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.onchange = async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      const visibility = prompt('Visibility (members, committee, admin)', 'members');
+      if (!visibility) return;
+      await uploadDocument(file, visibility);
+      await loadData();
+      showMessage('Document uploaded.');
+    };
+    fileInput.click();
+  });
+
+  document.getElementById('members-search').addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
+    const filtered = memberItems.filter((member) => member.full_name.toLowerCase().includes(query));
+    memberItems = filtered;
+    renderMembers();
+  });
+
+  document.getElementById('news-search').addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
+    const filtered = newsItems.filter((item) => item.title.toLowerCase().includes(query));
+    newsItems = filtered;
+    renderNews();
+  });
+
+  document.getElementById('events-search').addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
+    const filtered = eventItems.filter((event) => event.title.toLowerCase().includes(query));
+    eventItems = filtered;
+    renderEvents();
+  });
+
+  await loadData();
+</script>

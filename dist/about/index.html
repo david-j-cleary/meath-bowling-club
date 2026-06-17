@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>About | Meath Bowling Club</title><meta name="description" content="Learn about Meath Bowling Club and our community spirit."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="/_astro/about.B7FsG_WM.css"></head> <body class="bg-slate-50 text-slate-900 antialiased"> <div class="min-h-screen flex flex-col"> <header class="bg-white border-b border-slate-200"> <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"> <a href="/" class="flex items-center gap-3 text-club-700"> <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-club-100 text-lg font-bold">M</span> <div> <p class="text-sm font-semibold uppercase tracking-[0.3em]">Meath Bowling Club</p> <p class="text-xs text-slate-600">Lawn bowls for the local community</p> </div> </a> <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700"> <a href="/about">About</a> <a href="/membership">Membership</a> <a href="/news">News</a> <a href="/events">Events</a> <a href="/gallery">Gallery</a> <a href="/contact">Contact</a> </nav> <div class="hidden md:block"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> <div class="md:hidden"> <div id="auth-nav" class="inline-flex items-center"> <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a> </div> <script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script> </div> </div> </header> <main class="flex-1">  <section class="bg-white"> <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8"> <div class="space-y-10"> <div class="space-y-4"> <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">About the club</p> <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Our story, values, and community</h1> <p class="max-w-3xl text-lg leading-8 text-slate-600">Meath Bowling Club is a welcoming community for local bowlers and visitors. We support friendly competitions, coaching, and social gatherings for all ages.</p> </div> <div class="grid gap-8 lg:grid-cols-2"> <div class="space-y-6 rounded-3xl bg-slate-50 p-8 shadow-sm"> <h2 class="text-2xl font-semibold text-slate-900">Our mission</h2> <p class="text-slate-600">To grow the sport of lawn bowls in Meath by creating an inclusive club where members can learn, play, and connect with the local community.</p> <ul class="space-y-3 text-slate-600"> <li>Local coaching for new members</li> <li>Friendly matches and events</li> <li>Community-led club management</li> </ul> </div> <div class="space-y-6 rounded-3xl bg-slate-50 p-8 shadow-sm"> <h2 class="text-2xl font-semibold text-slate-900">Why join</h2> <p class="text-slate-600">Members receive access to club news, documents, member-only events, and a supportive group of bowlers.</p> <div class="grid gap-3"> <div class="rounded-3xl bg-white p-5 shadow-sm"> <p class="font-semibold text-slate-900">Club coaching</p> <p class="mt-2 text-slate-600">Skills sessions for beginners and experienced bowlers.</p> </div> <div class="rounded-3xl bg-white p-5 shadow-sm"> <p class="font-semibold text-slate-900">Social events</p> <p class="mt-2 text-slate-600">Regular social gatherings and match days.</p> </div> <div class="rounded-3xl bg-white p-5 shadow-sm"> <p class="font-semibold text-slate-900">Club support</p> <p class="mt-2 text-slate-600">A friendly committee dedicated to maintaining the club.</p> </div> </div> </div> </div> <div class="mt-8 rounded-3xl overflow-hidden bg-white shadow-sm"> <img src="/images/club-green.svg" alt="Club green placeholder" class="w-full object-cover"> </div> <div class="rounded-3xl bg-club-50 p-8 shadow-sm"> <h2 class="text-2xl font-semibold text-slate-900">Meet the club</h2> <p class="mt-4 text-slate-600">Our committee and members work together to plan events, maintain the green, and welcome visitors.</p> </div> </div> </div> </section>  </main> <footer class="bg-slate-950 text-slate-200"> <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"> <div class="grid gap-8 md:grid-cols-3"> <div> <p class="text-lg font-semibold text-white">Meath Bowling Club</p> <p class="mt-3 text-sm leading-6 text-slate-300">Friendly, community-first lawn bowls in Meath. Everyone is welcome, whether you're new or returning.</p> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Quick links</p> <ul class="mt-4 space-y-3 text-sm text-slate-300"> <li><a href="/about" class="hover:text-white">About</a></li> <li><a href="/membership" class="hover:text-white">Membership</a></li> <li><a href="/news" class="hover:text-white">News</a></li> <li><a href="/events" class="hover:text-white">Gallery</a></li> </ul> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Contact</p> <p class="mt-4 text-sm text-slate-300">Meath, Ireland</p> <p class="mt-2 text-sm text-slate-300">Email: <a href="mailto:info@meathbowlingclub.ie" class="text-white">info@meathbowlingclub.ie</a></p> </div> </div> <div class="mt-10 border-t border-slate-800 pt-6 text-sm text-slate-500">© 2026 Meath Bowling Club. Built for community.</div> </div> </footer> </div> </body></html>
