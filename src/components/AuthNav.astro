@@ -1,0 +1,29 @@
+---
+---
+<div id="auth-nav" class="inline-flex items-center">
+  <a id="auth-action" href="/login" class="inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white">Login</a>
+</div>
+
+<script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+  const authAction = document.getElementById('auth-action');
+
+  async function updateNav() {
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      authAction.textContent = 'Members';
+      authAction.href = '/members';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    } else {
+      authAction.textContent = 'Login';
+      authAction.href = '/login';
+      authAction.className = 'inline-flex items-center rounded-full bg-club-700 px-4 py-2 text-sm font-semibold text-white';
+    }
+  }
+
+  updateNav();
+
+  supabase.auth.onAuthStateChange(() => {
+    updateNav();
+  });
+</script>

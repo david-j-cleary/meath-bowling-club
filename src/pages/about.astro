@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+<BaseLayout title="About" description="Learn about Meath Bowling Club and our community spirit.">
+  <SiteHeader currentUser={null} slot="header" />
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="space-y-10">
+        <div class="space-y-4">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">About the club</p>
+          <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Our story, values, and community</h1>
+          <p class="max-w-3xl text-lg leading-8 text-slate-600">Meath Bowling Club is a welcoming community for local bowlers and visitors. We support friendly competitions, coaching, and social gatherings for all ages.</p>
+        </div>
+        <div class="grid gap-8 lg:grid-cols-2">
+          <div class="space-y-6 rounded-3xl bg-slate-50 p-8 shadow-sm">
+            <h2 class="text-2xl font-semibold text-slate-900">Our mission</h2>
+            <p class="text-slate-600">To grow the sport of lawn bowls in Meath by creating an inclusive club where members can learn, play, and connect with the local community.</p>
+            <ul class="space-y-3 text-slate-600">
+              <li>Local coaching for new members</li>
+              <li>Friendly matches and events</li>
+              <li>Community-led club management</li>
+            </ul>
+          </div>
+          <div class="space-y-6 rounded-3xl bg-slate-50 p-8 shadow-sm">
+            <h2 class="text-2xl font-semibold text-slate-900">Why join</h2>
+            <p class="text-slate-600">Members receive access to club news, documents, member-only events, and a supportive group of bowlers.</p>
+            <div class="grid gap-3">
+              <div class="rounded-3xl bg-white p-5 shadow-sm">
+                <p class="font-semibold text-slate-900">Club coaching</p>
+                <p class="mt-2 text-slate-600">Skills sessions for beginners and experienced bowlers.</p>
+              </div>
+              <div class="rounded-3xl bg-white p-5 shadow-sm">
+                <p class="font-semibold text-slate-900">Social events</p>
+                <p class="mt-2 text-slate-600">Regular social gatherings and match days.</p>
+              </div>
+              <div class="rounded-3xl bg-white p-5 shadow-sm">
+                <p class="font-semibold text-slate-900">Club support</p>
+                <p class="mt-2 text-slate-600">A friendly committee dedicated to maintaining the club.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 rounded-3xl overflow-hidden bg-white shadow-sm">
+          <img src="/images/club-green.svg" alt="Club green placeholder" class="w-full object-cover" />
+        </div>
+        <div class="rounded-3xl bg-club-50 p-8 shadow-sm">
+          <h2 class="text-2xl font-semibold text-slate-900">Meet the club</h2>
+          <p class="mt-4 text-slate-600">Our committee and members work together to plan events, maintain the green, and welcome visitors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <SiteFooter slot="footer" />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+<BaseLayout title="Contact" description="Contact Meath Bowling Club for membership and enquiries.">
+  <SiteHeader currentUser={null} slot="header" />
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+        <div class="rounded-3xl bg-white p-8 shadow-sm">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-club-700">Contact us</p>
+          <h1 class="mt-3 text-4xl font-semibold text-slate-900">Get in touch</h1>
+          <p class="mt-4 text-slate-600">Send a message to learn more about membership, events, or visiting the club green.</p>
+
+          <ContactForm />
+        </div>
+        <div class="space-y-6 rounded-3xl bg-club-50 p-8 shadow-sm">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Visit us</p>
+            <p class="mt-4 text-lg font-semibold text-slate-900">Meath Bowling Club Green</p>
+            <p class="mt-2 text-slate-600">Local community lawn bowls location in Meath.</p>
+          </div>
+          <div class="mt-4 overflow-hidden rounded-2xl bg-white p-2">
+            <img src="/images/club-green.svg" alt="Map placeholder" class="w-full object-cover" />
+          </div>
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Email</p>
+            <p class="mt-4 text-slate-600">info@meathbowlingclub.ie</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Opening hours</p>
+            <p class="mt-4 text-slate-600">Weekdays: 5pm - 8pm<br />Saturday: 10am - 4pm</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <SiteFooter slot="footer" />
+</BaseLayout>

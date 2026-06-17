@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const page = {
+  title: 'Home',
+  description: 'Welcome to Meath Bowling Club — a friendly lawn bowls community in Meath.'
+};
+---
+<BaseLayout title={page.title} description={page.description}>
+  <SiteHeader currentUser={null} slot="header" />
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+        <div class="space-y-6">
+          <span class="inline-flex rounded-full bg-club-100 px-3 py-1 text-sm font-semibold uppercase tracking-[0.24em] text-club-700">Community Lawn Bowls</span>
+          <h1 class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Welcome to Meath Bowling Club</h1>
+          <p class="max-w-2xl text-lg leading-8 text-slate-600">Join our friendly local club for bowls, social events, and community spirit across the seasons.</p>
+          <div class="flex flex-col gap-4 sm:flex-row">
+            <a href="/membership" class="inline-flex items-center justify-center rounded-full bg-club-700 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-club-500">Join the Club</a>
+            <a href="/events" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm hover:border-slate-300">See Events</a>
+          </div>
+        </div>
+        <div class="relative rounded-3xl bg-club-50 p-6 shadow-sm sm:p-10">
+          <div class="aspect-[4/3] overflow-hidden rounded-3xl bg-slate-100">
+            <img src="/images/club-green.svg" alt="Meath Bowling Club green" class="h-full w-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <article class="rounded-3xl bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-semibold text-slate-900">Friendly club environment</h2>
+          <p class="mt-3 text-slate-600">A warm welcome for new bowlers and experienced players alike.</p>
+        </article>
+        <article class="rounded-3xl bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-semibold text-slate-900">Local events</h2>
+          <p class="mt-3 text-slate-600">Club matches, coaching sessions, and community socials.</p>
+        </article>
+        <article class="rounded-3xl bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-semibold text-slate-900">Member resources</h2>
+          <p class="mt-3 text-slate-600">Access notices, documents, and club updates after login.</p>
+        </article>
+        <article class="rounded-3xl bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-semibold text-slate-900">Easy contact</h2>
+          <p class="mt-3 text-slate-600">Get in touch with the club for visits and membership questions.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div class="rounded-3xl bg-club-50 p-8 shadow-sm">
+          <h2 class="text-2xl font-semibold text-slate-900">Latest event</h2>
+          <p class="mt-4 text-slate-600">Saturday club open day with friendly matches and refreshments. All welcome to watch and learn.</p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-3xl bg-white p-5 shadow-sm">
+              <p class="text-sm uppercase tracking-[0.24em] text-slate-400">When</p>
+              <p class="mt-2 text-lg font-semibold text-slate-900">Saturday, 10:00 AM</p>
+            </div>
+            <div class="rounded-3xl bg-white p-5 shadow-sm">
+              <p class="text-sm uppercase tracking-[0.24em] text-slate-400">Where</p>
+              <p class="mt-2 text-lg font-semibold text-slate-900">Meath Bowling Club green</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-3xl bg-club-50 p-8 shadow-sm">
+          <h2 class="text-2xl font-semibold text-slate-900">Featured news</h2>
+          <p class="mt-4 text-slate-600">Read updates from the club, competition results, and announcements for members.</p>
+          <div class="mt-8 rounded-3xl bg-white p-6 shadow-sm">
+            <p class="text-sm uppercase tracking-[0.24em] text-club-700">Club update</p>
+            <h3 class="mt-3 text-xl font-semibold text-slate-900">New coaching sessions start this month</h3>
+            <p class="mt-3 text-slate-600">Improve your skills with weekly coaching for novice and experienced bowlers.</p>
+            <a href="/news" class="mt-5 inline-flex items-center text-club-700 hover:underline">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SiteFooter slot="footer" />
+</BaseLayout>

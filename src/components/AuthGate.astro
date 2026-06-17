@@ -1,0 +1,61 @@
+---
+---
+<div class="relative rounded-3xl bg-white p-8 shadow-sm" id="auth-gate-root" data-required-level={requiredLevel}>
+  <div id="auth-gate-loading" class="space-y-4">
+    <p class="text-xl font-semibold text-slate-900">Checking access...</p>
+    <p class="text-slate-600">Please wait while we verify your club membership status.</p>
+  </div>
+  <div id="auth-gate-content" hidden>
+    <slot />
+  </div>
+  <div id="auth-gate-unauthorized" hidden class="space-y-4">
+    <p class="text-xl font-semibold text-slate-900">Access restricted</p>
+    <p class="text-slate-600">This content is for authorized members only.</p>
+    <a href="/login" class="inline-flex items-center rounded-full bg-club-700 px-5 py-3 text-sm font-semibold text-white">Sign in</a>
+  </div>
+</div>
+
+<script type="module" client:load>
+  import { supabase } from '../lib/supabase';
+
+  const root = document.getElementById('auth-gate-root');
+  const loading = document.getElementById('auth-gate-loading');
+  const content = document.getElementById('auth-gate-content');
+  const unauthorized = document.getElementById('auth-gate-unauthorized');
+  const requiredLevel = Number(root?.dataset.requiredLevel ?? '1');
+
+  async function verifyRole() {
+    const { data } = await supabase.auth.getSession();
+    const user = data.session?.user;
+
+    if (!user) {
+      return false;
+    }
+
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('role, is_active')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !profile || !profile.is_active) {
+      return false;
+    }
+
+    const levelMap = {
+      member: 1,
+      committee: 2,
+      admin: 3
+    };
+
+    return levelMap[profile.role] >= requiredLevel;
+  }
+
+  const isAuthorized = await verifyRole();
+  loading.hidden = true;
+  if (isAuthorized) {
+    content.hidden = false;
+  } else {
+    unauthorized.hidden = false;
+  }
+</script>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import LoginForm from '../components/LoginForm.astro';
+---
+<BaseLayout title="Login" description="Member login for Meath Bowling Club.">
+  <SiteHeader currentUser={null} slot="header" />
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-md px-4 py-20 sm:px-6 lg:px-8">
+      <div class="space-y-6 rounded-3xl bg-white p-10 shadow-sm">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-club-700">Member login</p>
+          <h1 class="mt-4 text-3xl font-semibold text-slate-900">Access members-only content</h1>
+          <p class="mt-3 text-slate-600">Sign in to view notices, events, documents, and club updates.</p>
+        </div>
+        <div class="mt-4 overflow-hidden rounded-2xl bg-club-50 p-2">
+          <img src="/images/club-green.svg" alt="Login placeholder" class="w-full object-cover" />
+        </div>
+        <LoginForm />
+        <p class="text-center text-sm text-slate-500">Need help? <a href="/contact" class="text-club-700 hover:underline">Contact us</a></p>
+      </div>
+    </div>
+  </section>
+  <SiteFooter slot="footer" />
+</BaseLayout>

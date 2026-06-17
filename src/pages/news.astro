@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const articles = [
+  {
+    title: 'New coaching sessions start this month',
+    excerpt: 'Weekly bowls coaching for all abilities begins soon. Join us to learn new skills and meet club members.',
+    date: 'May 12, 2026',
+    href: '/news/new-coaching-sessions'
+  },
+  {
+    title: 'Club open day highlights',
+    excerpt: 'Our recent open day brought new visitors and friendly matches. See the community moments from the green.',
+    date: 'April 28, 2026',
+    href: '/news/open-day-highlights'
+  }
+];
+---
+<BaseLayout title="News" description="Latest news and announcements from Meath Bowling Club.">
+  <SiteHeader currentUser={null} slot="header" />
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="space-y-6">
+        <div class="space-y-3">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-club-700">Club news</p>
+          <h1 class="text-4xl font-semibold text-slate-900 sm:text-5xl">Latest announcements</h1>
+          <p class="max-w-3xl text-lg leading-8 text-slate-600">Stay informed about club events, results, and member notices.</p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          {articles.map((article) => (
+            <article class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+              <img src="/images/gallery-1.svg" alt="Article image" class="mb-4 h-44 w-full rounded-2xl object-cover" />
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">{article.date}</p>
+              <h2 class="mt-4 text-2xl font-semibold text-slate-900">{article.title}</h2>
+              <p class="mt-3 text-slate-600">{article.excerpt}</p>
+              <a href={article.href} class="mt-6 inline-flex items-center text-club-700 hover:underline">Read more</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <SiteFooter slot="footer" />
+</BaseLayout>
