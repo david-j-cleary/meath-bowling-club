@@ -8,15 +8,13 @@ const events = [
     title: 'Saturday Club Open Day',
     date: 'June 21, 2026',
     time: '10:00 AM',
-    location: 'Meath Bowling Club green',
-    href: '/events/club-open-day'
+    location: 'Meath Bowling Club green'
   },
   {
     title: 'Summer social evening',
     date: 'July 9, 2026',
     time: '7:00 PM',
-    location: 'Clubhouse',
-    href: '/events/summer-social'
+    location: 'Clubhouse'
   }
 ];
 ---
@@ -37,7 +35,7 @@ const events = [
               <p class="text-sm font-semibold uppercase tracking-[0.24em] text-club-300">{event.date}</p>
               <h2 class="mt-4 text-2xl font-semibold text-club-900">{event.title}</h2>
               <p class="mt-3 text-club-500">{event.time} · {event.location}</p>
-              <a href={event.href} class="mt-6 inline-flex items-center text-club-700 hover:underline">View details</a>
+              <span class="mt-6 inline-flex items-center text-club-300 cursor-not-allowed" aria-disabled="true">View details</span>
             </article>
           ))}
         </div>
